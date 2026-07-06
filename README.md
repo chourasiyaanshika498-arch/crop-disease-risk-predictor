@@ -1,56 +1,181 @@
-Crop Disease Risk Predictor
+# 🌾 Crop Disease Risk Predictor
 
-A tabular machine learning system that predicts crop disease outbreak risk (Low / Medium / High) for 10+ major Indian crops, based on soil and weather conditions. Built by comparing 4 models, tuned with GridSearchCV, explained with SHAP, and deployed as a farmer-facing Streamlit app with district-level risk lookup.
+An explainable Machine Learning system that predicts **crop disease outbreak risk (Low /Medium / High)** for major Indian crops using soil and weather conditions.
 
-What It Does
-A user selects their crop, district, and season, then enters current soil readings (pH, N-P-K, soil moisture) and weather readings (rainfall, temperature, humidity). The app returns:
+The project compares multiple ML algorithms, selects the best-performing model using **GridSearchCV**, explains every prediction using **SHAP**, and deploys the solution through an interactive **Streamlit** web application.
 
-A predicted risk level (Low / Medium / High) with confidence breakdown
-A SHAP-based explanation showing the top factors driving that risk — so the result is interpretable, not a black box
-Results
-Four models were trained and compared on the same feature set:
+---
 
-Model	Accuracy
-Logistic Regression	~73%
-Random Forest	~84%
-SVM	~86%
-XGBoost (final)	~90%
-XGBoost was selected and further tuned via GridSearchCV, with particular attention to precision on the minority High risk class — the most operationally important class, since missing a real high-risk case is costlier than a false alarm.
+# Features
 
-10+ crops: Wheat, Rice, Maize, Cotton, Sugarcane, Soybean, Groundnut, Mustard, Chickpea, Tomato
-District-level granularity across 10 districts
-SHAP explainability layer for per-prediction reasoning
-Project Structure
+- Predict disease risk for 10+ Indian crops
+- District-specific predictions
+- Weather + soil based inference
+- XGBoost model optimized using GridSearchCV
+- SHAP explanations for every prediction
+- Farmer-friendly Streamlit interface
+- Confidence score for each prediction
+
+---
+
+# Workflow
+
+User Input
+(Crop + District + Season + Soil + Weather)
+
+↓
+
+Preprocessing
+
+↓
+
+Model Prediction (XGBoost)
+
+↓
+
+Risk Classification
+
+↓
+
+SHAP Explainability
+
+↓
+
+Prediction + Confidence + Important Features
+
+---
+
+# Tech Stack
+
+- Python
+- XGBoost
+- SHAP
+- Scikit-learn
+- Pandas
+- NumPy
+- Streamlit
+
+---
+
+# Dataset
+
+Since no publicly available dataset directly maps soil and weather measurements to crop disease outbreak risk across multiple Indian crops, this project generates a synthetic dataset based on agronomic relationships.
+
+The dataset incorporates realistic assumptions such as:
+
+- Higher humidity increases fungal disease risk
+- Poor N-P-K levels reduce crop resistance
+- Soil pH deviation stresses crops
+- Excess rainfall raises infection probability
+
+Randomized noise is added to improve diversity while preserving realistic relationships.
+
+**Dataset Size**
+
+- 5,000 samples
+- 10+ crops
+- 10 districts
+- Soil attributes
+- Weather attributes
+
+---
+
+# Model Comparison
+
+| Model | Accuracy |
+|---------|----------|
+| Logistic Regression | 73% |
+| Random Forest | 84% |
+| Support Vector Machine | 86% |
+| **XGBoost** | **90%** |
+
+XGBoost achieved the highest validation accuracy and better performance on the minority **High Risk** class after hyperparameter tuning using **GridSearchCV**, making it the final deployed model.
+
+---
+
+# Explainable AI
+
+Instead of acting as a black box, the model explains every prediction using **SHAP (SHapley Additive Explanations)**.
+
+Users can see:
+
+- Which features increased disease risk
+- Which features lowered disease risk
+- Relative contribution of each feature
+
+This improves transparency and trust in model predictions.
+
+---
+
+# Project Structure
+
+```
 crop-disease-risk-predictor/
-├── generate_dataset.py     # creates the labeled soil/weather dataset
-├── crop_disease_data.csv   # generated dataset (5000 rows)
-├── train.py                # compares 4 models, tunes XGBoost, saves model
-├── app.py                  # Streamlit farmer-facing app
-├── models/                 # saved model artifacts (after training)
+│
+├── generate_dataset.py
+├── train.py
+├── app.py
+├── crop_disease_data.csv
+├── models/
 ├── requirements.txt
 └── README.md
-Setup & Usage
-1. Clone and install
-git clone <your-repo-url>
+```
+
+---
+
+# Installation
+
+Clone the repository
+
+```bash
+git clone <repo-url>
 cd crop-disease-risk-predictor
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
-2. Generate dataset
+```
+
+Generate dataset
+
+```bash
 python generate_dataset.py
-3. Train model
+```
+
+Train model
+
+```bash
 python train.py
-Prints accuracy and F1 for all 4 models, runs GridSearchCV, saves model artifacts to models/.
+```
 
-4. Run app
+Launch Streamlit app
+
+```bash
 streamlit run app.py
-Opens at http://localhost:8501
+```
 
-Note on Synthetic Data
-No public dataset directly maps soil and weather readings to a disease risk label per crop. This project builds a labeled dataset using realistic agronomic relationships (high humidity raises fungal disease risk, pH deviation from ideal stresses the plant, low N-P-K weakens disease resistance) with randomized noise. This is disclosed transparently — mention it upfront in interviews.
+---
 
-Tech Stack
-Python · XGBoost · SHAP · Streamlit · Scikit-learn · Pandas · GridSearchCV
+# Future Improvements
 
-Possible Extensions
-Replace synthetic data with real ICAR Soil Health Card and IMD historical weather data
-Add a time-series component for disease risk trend over a growing season
-Deploy publicly via Streamlit Community Cloud
+- Train on real ICAR and IMD datasets
+- Satellite imagery integration
+- Time-series disease forecasting
+- Cloud deployment
+- Mobile application
+- Disease-specific recommendations
+
+---
+
+# Built With
+
+- Python
+- Scikit-learn
+- XGBoost
+- SHAP
+- Streamlit
+- Pandas
+
+AI • Machine Learning • Explainable AI • Agritech
