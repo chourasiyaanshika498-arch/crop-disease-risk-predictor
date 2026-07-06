@@ -169,7 +169,6 @@ streamlit run app.py
 - Train on real ICAR and IMD datasets
 - Satellite imagery integration
 - Time-series disease forecasting
-- Cloud deployment
 - Mobile application
 - Disease-specific recommendations
 
