@@ -1,3 +1,9 @@
+## 🚀 Live Demo
+
+Explore the deployed application here:
+
+🔗 **Live Project:** [Click here to try the Crop Disease Risk Predictor](https://crop-disease-risk-predictor-ahuzekncrx99eehcjfropa.streamlit.app/)
+
 # 🌾 Crop Disease Risk Predictor
 
 An explainable Machine Learning system that predicts **crop disease outbreak risk (Low /Medium / High)** for major Indian crops using soil and weather conditions.
